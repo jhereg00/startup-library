@@ -7,4 +7,5 @@ describe('Functions', function () {
   require('tests/test.extendObject');
   require('tests/test.classes');
   require('tests/test.removeElement');
+  require('tests/test.getPageOffset');
 });
