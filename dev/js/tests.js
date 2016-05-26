@@ -1,4 +1,10 @@
 // runs the mocha tests
-require('tests/test.AjaxRequest');
-require('tests/test.extendObject');
-require('tests/test.classes');
+describe('Classes', function () {
+  require('tests/test.AjaxRequest');
+});
+
+describe('Functions', function () {
+  require('tests/test.extendObject');
+  require('tests/test.classes');
+  require('tests/test.removeElement');
+});
