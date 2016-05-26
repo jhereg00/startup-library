@@ -8,4 +8,5 @@ describe('Functions', function () {
   require('tests/test.classes');
   require('tests/test.removeElement');
   require('tests/test.getPageOffset');
+  require('tests/test.getScrollPosition');
 });
