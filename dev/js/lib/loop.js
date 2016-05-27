@@ -42,7 +42,7 @@ if ( !window.requestAnimationFrame ) {
 }
 
 // other lib helpers
-var getScrollPos = require('lib/getScrollPos');
+var getScrollPos = require('lib/getScrollPosition');
 
 // private vars
 var running = true,

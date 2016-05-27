@@ -1,6 +1,6 @@
 var expect = chai.expect;
 
-var getScrollPos = require('../lib/getScrollPosition');
+var getScrollPos = require('lib/getScrollPosition');
 
 describe('getScrollPosition', function () {
   it ('gets the window\'s scroll position Y', function (done) {
@@ -10,7 +10,6 @@ describe('getScrollPosition', function () {
       expect(getScrollPos()).to.equal(0);
       window.scrollTo(0,100);
       requestAnimationFrame(function () {
-        console.log(getScrollPos());
         expect(getScrollPos()).to.equal(100);
         done();
       });
