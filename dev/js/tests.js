@@ -11,6 +11,7 @@ describe('Functions', function () {
   require('tests/test.removeElement');
   require('tests/test.getPageOffset');
   require('tests/test.getScrollPosition');
+  require('tests/test.formData');
 });
 
 describe('Features', function () {
