@@ -4,18 +4,20 @@ var loop = require('lib/loop');
 
 describe('loop', function () {
   var testFn = function testFn () {
+    //console.log(new Date().getTime());
     return 1;
   }
   it('should call tick functions every frame', function (done) {
     var spy = sinon.spy(testFn);
 
     loop.addFunction(spy);
-    var frames = 0;
+    var frames = -1;
     var start = new Date().getTime();
     (function incFrame () {
       frames++;
       if (new Date().getTime() > start + 1200) {
         loop.removeFunction(spy);
+        //console.log(spy.callCount,frames);
         expect(spy.callCount).to.equal(frames);
         done();
       }

@@ -15,6 +15,10 @@ describe('ScrollController', function () {
     document.body.appendChild(el);
     window.scrollTo(0,0);
     requestAnimationFrame(function () { done(); });
+  });
+  after(function () {
+    el.remove();
+    document.body.style.minHeight = '';
   })
   describe('constructor', function () {
     it('measures and initializes the function', function (done) {

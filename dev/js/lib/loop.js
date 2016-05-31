@@ -45,7 +45,7 @@ if ( !window.requestAnimationFrame ) {
 var getScrollPos = require('lib/getScrollPosition');
 
 // private vars
-var running = true,
+var running = false,
     lastBodyWidth = document.body.offsetWidth, // store width to determine if resize needed
     lastBodyHeight = document.body.offsetHeight, // store height to determine if resize needed
     lastScroll = -1,
@@ -110,8 +110,10 @@ var doLoopFunctions = function doLoopFunctions (type,currentTime) {
 
 // start/stop control
 var start = function startLoop () {
-  running = true;
-	loopFn();
+	if (!running) {
+	  running = true;
+		loopFn();
+	}
 }
 var stop = function stopLoop () {
   running = false;

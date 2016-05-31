@@ -2,6 +2,7 @@
 describe('Classes', function () {
   require('tests/test.AjaxRequest');
   require('tests/test.ScrollController');
+  require('tests/test.DynamicStylesheet');
 });
 
 describe('Functions', function () {
