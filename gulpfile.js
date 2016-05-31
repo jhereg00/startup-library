@@ -14,8 +14,8 @@ gulp.task('scripts',require('./gulp-tasks/scripts'));
 // watch
 gulp.task('dev',['scripts','sass'], function (done) {
   global.devMode = true;
-  gulp.watch(['dev/scss/**/*'],['sass']);
-  gulp.watch(['dev/js/**/*'],['scripts']);
+  gulp.watch([global.devPath + '/scss/**/*'],['sass']);
+  gulp.watch([global.devPath + '/js/**/*'],['scripts']);
 });
 // watch alias
 gulp.task('watch',['dev']);
