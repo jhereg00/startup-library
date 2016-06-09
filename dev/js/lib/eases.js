@@ -12,6 +12,14 @@ var eases = {
       return s + c * (-2 * (p - 1) * (p - 1) + 1);
     }
   },
+  'easeInOutCubic' : function (s,c,p) {
+    if (p < .5) {
+      return s + c * (4 * p * p * p);
+    }
+    else {
+      return s + c * (4 * (p - 1) * (p - 1) * (p - 1) + 1)
+    }
+  },
   'easeIn' : function (s,c,p) {
     return s + c * p * p;
   },
