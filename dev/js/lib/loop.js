@@ -106,6 +106,7 @@ var removeFunction = function removeFunction (fn) {
     if (index !== -1) {
       loopFuncs[types[i]].splice(index,1);
       found = true;
+			loopFnIndex--;
       break;
     }
   }
@@ -120,10 +121,11 @@ var removeFunction = function removeFunction (fn) {
 }
 
 // do all functions of a given type
+var loopFnIndex = 0;
 var doLoopFunctions = function doLoopFunctions (type,currentTime) {
-  for (var i = 0, len = loopFuncs[type].length; i < len; i++) {
-		if (loopFuncs[type][i]) // extra check for safety
-    	loopFuncs[type][i].call(window,currentTime);
+  for (loopFnIndex = 0, len = loopFuncs[type].length; loopFnIndex < len; loopFnIndex++) {
+		if (loopFuncs[type][loopFnIndex]) // extra check for safety in case some were removed
+    	loopFuncs[type][loopFnIndex].call(window,currentTime);
   }
 }
 
