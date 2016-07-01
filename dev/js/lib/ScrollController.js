@@ -18,7 +18,6 @@
 // helpers
 var getPageOffset = require('lib/getPageOffset'),
     windowSize = require('lib/windowSize'),
-    getScrollPos = require('lib/getScrollPosition'),
     loop = require('lib/loop')
     ;
 
@@ -56,12 +55,12 @@ ScrollController.prototype = {
     this.height = this.bottom - this.top;
   },
   getPercentage: function () {
-    var scrollY = getScrollPos();
+    var scrollY = loop.getLastScrollPos();
     var perc = (scrollY - this.top) / (this.height);
     return perc;
   },
   getPixels: function () {
-    return getScrollPos() - this.top;
+    return loop.getLastScrollPos() - this.top;
   },
   disable: function () {
     loop.removeFunction(this.onResize);
