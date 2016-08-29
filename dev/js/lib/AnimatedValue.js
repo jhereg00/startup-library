@@ -7,11 +7,27 @@
  *  useful value.
  *
  *  @param Array of keyframes (see below)
- *    @param frame
- *    @param value
- *    [@param ease] - function to be passed (start value, change, percentage of change)
- *  [@param noStartBound] - pass true to math the animation if the frame value is less than the first keyframe's
- *  [@param noEndBound] - pass true to continue the animation past the final keyframe using the last easing
+ *    @param {number} frame
+ *    @param {number} value
+ *    @param {function, optional} ease - function to be passed (start value, change, percentage of change)
+ *  @param {boolean, optional} noStartBound - pass true to math the animation if the frame value is less than the first keyframe's
+ *  @param {boolean, optional} noEndBound - pass true to continue the animation past the final keyframe using the last easing
+ *
+ *  @method get(frame) - gets value at the specified "frame"
+ *
+ *  code:
+ *    var av = new AnimatedValue([
+ *      {
+ *        frame: 0,
+ *        value: 0,
+ *        ease: eases.easeIn
+ *      },
+ *      {
+ *        frame: 100,
+ *        value: 1
+ *      }
+ *    ]);
+ *    av.get(80); // ~0.64
  */
 
 /**

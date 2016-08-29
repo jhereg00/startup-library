@@ -8,24 +8,27 @@
  *  All functions (complete, success, and error) are passed the response text
  *  and the xhttp request as arguments.
  *
- *  @param url
- *  @param options {
- *    [method] : HTTP method to use, defaults to "GET"
- *    [data] : object of data to send
- *    [complete] : function to call when request is complete, successful or not
- *    [success] : function to call when request completes with status code 2xx
- *    [error] : function to call when request fails or completes with status code 4xx or 5xx
- *  }
+ *  @param {string} url
+ *  @param {object} options
+ *    @param {string} method - HTTP method to use, defaults to "GET"
+ *    @param {object} data - object of data to send
+ *    @param {function} complete - function to call when request is complete, successful or not
+ *    @param {function} success - function to call when request completes with status code 2xx
+ *    @param {function} error - function to call when request fails or completes with status code 4xx or 5xx
  *
  *  @method addStateListener
  *    @param {int} stateIndex
- *    @param {Function} function to call when that state is reached
- *      passed 2 arguments: {string} responseText, {XMLHttpRequest} the request object
+ *    @param {Function} callback - function to call when that state is reached
+ *      passed 2 arguments: `{string} responseText`, `{XMLHttpRequest} the request object`
  *  @method getReadyState
  *    @returns {int} readyState of request
  *
- *  @enum readyState
- *    UNSENT, OPENED, HEADERS_RECEIVED, LOADING, DONE
+ *  @prop {static enum} readyState
+ *    @prop UNSENT
+ *    @prop OPENED
+ *    @prop HEADERS_RECEIVED
+ *    @prop LOADING
+ *    @prop DONE
  */
 
 var AjaxRequest = function (url, options) {
