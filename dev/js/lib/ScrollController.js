@@ -16,7 +16,7 @@
  */
 
 // helpers
-var getPageOffset = require('lib/getPageOffset'),
+var offsetFrom = require('lib/offsetFrom'),
     windowSize = require('lib/windowSize'),
     loop = require('lib/loop')
     ;
@@ -49,7 +49,7 @@ var ScrollController = function ScrollController (element, onScroll) {
 }
 ScrollController.prototype = {
   measure: function () {
-    var po = getPageOffset(this.element);
+    var po = offsetFrom(this.element);
     this.top = Math.max(po.top - windowSize.height(), 0);
     this.bottom = po.top + this.element.offsetHeight;
     this.height = this.bottom - this.top;

@@ -121,7 +121,7 @@ var removeFunction = function removeFunction (fn) {
 }
 
 // do all functions of a given type
-var loopFnIndex = 0;
+var loopFnIndex = 0, len = 0;
 var doLoopFunctions = function doLoopFunctions (type,currentTime) {
   for (loopFnIndex = 0, len = loopFuncs[type].length; loopFnIndex < len; loopFnIndex++) {
 		if (loopFuncs[type][loopFnIndex]) // extra check for safety in case some were removed
