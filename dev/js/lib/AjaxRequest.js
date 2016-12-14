@@ -22,6 +22,7 @@
  *      passed 2 arguments: `{string} responseText`, `{XMLHttpRequest} the request object`
  *  @method getReadyState
  *    @returns {int} readyState of request
+ *  @method abort
  *
  *  @prop {static enum} readyState
  *    @prop UNSENT
@@ -105,6 +106,10 @@ AjaxRequest.prototype = {
   },
   getReadyState: function () {
     return this.xhttp.readyState;
+  },
+  abort: function () {
+    console.log('aborting AJAX call');
+    this.xhttp.abort();
   }
 }
 

@@ -1,8 +1,8 @@
-/***
+/**
  * offsetFrom helper function
  *
  * Get's an element's offset from another element, or the document `<html>` element if
- * the parent argument is omitted.  Uses `getClientRects`, so transforms, zooms,
+ * the second argument is omitted.  Uses `getClientRects`, so transforms, zooms,
  * or anything else that wouldn't affect `offsetTop` are still taken into account.
  *
  * If one of the elements doesn't have a clientRect (usually because it's
@@ -27,8 +27,8 @@ function offsetFrom (element, offsetElement) {
   if (elementRect && offsetElementRect) {
     return {
       top: elementRect.top - offsetElementRect.top,
-      right: elementRect.right - offsetElementRect.right,
-      bottom: elementRect.bottom - offsetElementRect.bottom,
+      right: offsetElementRect.right - elementRect.right,
+      bottom: offsetElementRect.bottom - elementRect.bottom,
       left: elementRect.left - offsetElementRect.left
     }
   }

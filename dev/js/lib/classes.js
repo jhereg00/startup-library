@@ -1,20 +1,21 @@
-/**
- *  cross browser functions to add/remove/check classes
+/***
+ * Class functions
  *
- *  exports:
- *    @method add
- *      @param DOMElement
- *      @param class : string || array of strings
- *    @method remove
- *      @param DOMElement
- *      @param class : string || array of strings
- *    @method has
- *      @param DOMElement
- *      @param class : string || array of strings
- *      @returns boolean : whether or not the class(es) are present
- *    @method toggle
- *      @param DOMElement
- *      @param class : string || array of strings
+ * Namespaced cross browser functions to add/remove/check classes.
+ *
+ * @method add
+ *   @param {DOMElement} targetElement
+ *   @param {string or array} class(es)
+ * @method remove
+ *   @param {DOMElement} targetElement
+ *   @param {string or array} class(es)
+ * @method has
+ *   @param {DOMElement} targetElement
+ *   @param {string or array} class(es)
+ *   @returns {boolean} - whether or not the class(es) are present
+ * @method toggle
+ *   @param {DOMElement} targetElement
+ *   @param {string or array} class(es)
  */
 
 // check if classList is supported

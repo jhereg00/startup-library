@@ -1,6 +1,21 @@
-/**
- *  a bunch of easing functions for making animations
- *  testing is fairly subjective, so not automated
+/***
+ * Eases
+ *
+ * A bunch of easing functions for making animations
+ * testing is fairly subjective, so not automated
+ *
+ * Each method accepts the same params.
+ *
+ * @param {number} starting value - value at the beginning of the ease
+ * @param {number} change value - difference between end value and start value
+ * @param {number} percentage - decimal between 0-1 representing how far along the ease to get the result for
+ *
+ * @method {number} easeInOut
+ * @method {number} easeInOutCubic
+ * @method {number} easeIn
+ * @method {number} easeInCubic
+ * @method {number} easeOut
+ * @method {number} easeOutCubic
  */
 
 var eases = {
@@ -38,12 +53,14 @@ var eases = {
   'smooth' : function (s,c,p) {
     return s + (c * cubicBezier(p,.23,.02,.44,1));
   },
+  'pulse' : function (s,c,p) {
+    return s + (c * cubicBezier(p,.17,.07,.24,1));
+  },
   'linear' : function (s,c,p) {
     return s + c * p;
   }
 }
 module.exports = eases;
-
 
 /***
  * cubicBezier function

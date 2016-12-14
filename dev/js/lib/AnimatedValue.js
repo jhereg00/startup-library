@@ -1,4 +1,4 @@
-/**
+/***
  *  AnimatedValue class
  *  sets value based on keyframes and position in animation
  *
@@ -14,6 +14,12 @@
  *  @param {boolean, optional} noEndBound - pass true to continue the animation past the final keyframe using the last easing
  *
  *  @method get(frame) - gets value at the specified "frame"
+ *
+ *  @static method make
+ *    @param {number} startValue
+ *    @param {number} endValue
+ *    @param {number} endFrame
+ *    @param {function} easeFn
  *
  *  code:
  *    var av = new AnimatedValue([
@@ -65,7 +71,7 @@ AnimatedValue.prototype = {
     // nope, do the maths
     var keyframe = 1;
     for (; keyframe < this.keyframes.length - 1 && frame > this.keyframes[keyframe].frame; keyframe++);
-    if (this.keyframes[keyframe - 1].ease) {
+    if (typeof this.keyframes[keyframe - 1].ease === 'function') {
       return this.keyframes[keyframe - 1].ease(
         this.keyframes[keyframe - 1].value,
         this.keyframes[keyframe].value - this.keyframes[keyframe - 1].value,
@@ -75,7 +81,27 @@ AnimatedValue.prototype = {
     else {
       return (this.keyframes[keyframe - 1].value + (this.keyframes[keyframe].value - this.keyframes[keyframe - 1].value) * (frame - this.keyframes[keyframe - 1].frame) / (this.keyframes[keyframe].frame - this.keyframes[keyframe - 1].frame));
     }
+  },
+  get firstFrame() {
+    return this.keyframes[0].frame;
+  },
+  get lastFrame() {
+    return this.keyframes[this.keyframes.length - 1].frame;
   }
+}
+// static helper
+AnimatedValue.make = function (startValue, endValue, endFrame, easeFn) {
+  return new AnimatedValue([
+    {
+      frame: 0,
+      value: startValue,
+      ease: easeFn
+    },
+    {
+      frame: endFrame,
+      value: endValue
+    }
+  ]);
 }
 
 module.exports = AnimatedValue;

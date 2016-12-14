@@ -10,6 +10,9 @@
  *  @method removeStyle
  *    @param selector :: String
  *    @param rules :: String or Array of property names to remove
+ *  @method getStyle
+ *    @param selector :: String
+ *    @param rule :: String
  */
 
 var extend = require('lib/extendObject');
@@ -81,6 +84,11 @@ DCSS.prototype = {
         delete this.styles[selector][rules[i]];
     }
     this.buildRules();
+  },
+  getStyle: function ( selector , rule ){
+    if (this.styles[selector] && this.styles[selector][rule])
+      return this.styles[selector][rule];
+    return null;
   }
 };
 

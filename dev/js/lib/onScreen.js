@@ -1,4 +1,4 @@
-/***
+/**
  * onScreen
  *
  * Determines if element is on screen and within the bounds of the offsets.
@@ -14,6 +14,11 @@
  *   until its bottom is above the 10% point of the screen.
  *
  * @returns {boolean}
+ *
+ * js:
+ *   var onScreen = require('lib/onScreen');
+ *   var el = document.querySelector('#my-div');
+ *   onScreen(el); // returns true or false
  */
 // requirements
 var windowSize = require('lib/windowSize');
