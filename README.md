@@ -4,7 +4,9 @@ This are my go-to startup files. To use, clone it and then remember to change th
 
 ## JS
 
-The javascript relies on a modular build system, like browserify or babel.  The lib files don't actually require babel, and use CommonJS syntax for the modules.  Default scripts task for gulp uses browserify.
+The javascript relies on a modular build system, like browserify.  The lib files are ES5 (so you don't require babel unless you want to use it for your own files), and use CommonJS syntax for the modules.
+
+[ESLint](http://eslint.org/) is included with my own preferences established.  It should be noted, though, that the gulp tasks don't adhere to them (because I'm too lazy to fix them). An error in the lint task is not fatal, and the code will still compile using browserify.
 
 ## SCSS
 

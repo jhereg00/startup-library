@@ -18,37 +18,37 @@ var eases = require('lib/eases');
 var setPrefixedStyle = require('lib/setPrefixedStyle');
 
 var buildFormatFn = function (defaultFormat) {
-  if (defaultFormat)
-    return function (v) {
-      return defaultFormat.replace(/[\d\.\-]+/,v);
-    };
-  else
-    return function (v) { return v.toString(); };
-}
+	if (defaultFormat)
+		return function (v) {
+			return defaultFormat.replace(/[\d\.\-]+/, v);
+		};
+	else
+return function (v) {
+	return v.toString(); 
+};
+};
 
 var animateStyle = function (element, property, value, fns, delay) {
-  fns = fns || {};
-  fns.valueFn = fns.valueFn || buildFormatFn(getComputedStyle(element)[property]);
-  var startTime = new Date().getTime() + (delay !== undefined ? delay : 0);
-  (function loop () {
-    var deltaTime = new Date().getTime() - startTime;
-    if (property === 'transform')
-      setPrefixedStyle(element, 'transform', fns.valueFn(value.get(deltaTime)));
-    else
+	fns = fns || {};
+	fns.valueFn = fns.valueFn || buildFormatFn(getComputedStyle(element)[property]);
+	var startTime = new Date().getTime() + (delay !== undefined ? delay : 0);
+	(function loop () {
+		var deltaTime = new Date().getTime() - startTime;
+		if (property === 'transform')
+			setPrefixedStyle(element, 'transform', fns.valueFn(value.get(deltaTime)));
+		else
       element.style[property] = fns.valueFn(value.get(deltaTime));
 
-    if (fns.tick)
-      fns.tick();
+		if (fns.tick)
+			fns.tick();
 
-    if (deltaTime < value.lastFrame) {
-      requestAnimationFrame(loop);
-    }
-    else {
-      if (fns.callback)
-        fns.callback(element);
-    }
-  })();
-}
+		if (deltaTime < value.lastFrame) {
+			requestAnimationFrame(loop);
+		}
+		else if (fns.callback)
+			fns.callback(element);
+	})();
+};
 
 /**
  * animateStyle.to
@@ -65,25 +65,25 @@ var animateStyle = function (element, property, value, fns, delay) {
  * @param {optional, number} delay
  */
 animateStyle.to = function (element, property, endValue, duration, ease, valueFn, delay) {
-  var value = AnimatedValue.make(parseFloat(getComputedStyle(element)[property], 10), endValue, duration, ease || eases.linear);
-  animateStyle(element, property, value, {
-    valueFn: valueFn
-  }, delay);
-}
+	var value = AnimatedValue.make(parseFloat(getComputedStyle(element)[property], 10), endValue, duration, ease || eases.linear);
+	animateStyle(element, property, value, {
+		valueFn: valueFn
+	}, delay);
+};
 
 /**
  * common value helpers
  */
 animateStyle.valueFns = {
-  translateY: function (v) {
-    return "translateY(" + v + "px)";
-  },
-  scale: function (v) {
-    return "scale(" + v + ")";
-  },
-  scaleY: function (v) {
-    return "scaleY(" + v + ")";
-  }
-}
+	translateY: function (v) {
+		return "translateY(" + v + "px)";
+	},
+	scale: function (v) {
+		return "scale(" + v + ")";
+	},
+	scaleY: function (v) {
+		return "scaleY(" + v + ")";
+	}
+};
 
 module.exports = animateStyle;

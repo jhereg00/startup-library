@@ -23,14 +23,14 @@
 // requirements
 var windowSize = require('lib/windowSize');
 
-function onScreen (el, onOffset, offOffset) {
-  var clientRect = el.getBoundingClientRect();
-  if (isNaN(onOffset))
-    onOffset = 1;
-  if (isNaN(offOffset))
-    offOffset = 0;
-  return (clientRect.top < windowSize.height() * onOffset &&
+var onScreen = function (el, onOffset, offOffset) {
+	var clientRect = el.getBoundingClientRect();
+	if (isNaN(onOffset))
+		onOffset = 1;
+	if (isNaN(offOffset))
+		offOffset = 0;
+	return (clientRect.top < windowSize.height() * onOffset &&
           clientRect.bottom > windowSize.height() * offOffset);
-}
+};
 
 module.exports = onScreen;

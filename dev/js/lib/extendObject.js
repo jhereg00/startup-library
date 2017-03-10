@@ -1,46 +1,37 @@
 /**
- *  extendObject function
+ * extendObject
  *
- *  extend one object with another object's property's (default is deep extend)
- *  this works with circular references and is faster than other deep extend methods
- *  http://jsperf.com/comparing-custom-deep-extend-to-jquery-deep-extend/2
- *
- *  based on this gist: https://gist.github.com/fshost/4146993
+ * @param target
+ * @param ...sources (rewritten to be ES5 friendly)
  */
-var array = '[object Array]',
-    object = '[object Object]',
-    targetMeta,
-    sourceMeta;
-
-function setMeta (value) {
-  // checks what type of value we have, array, object, or other
-  var jclass = {}.toString.call(value);
-  if (value === undefined) return 0;
-  else if (typeof value !== 'object') return false;
-  else if (jclass === array) return 1;
-  else if (jclass === object) return 2;
+var extendObject = function (target) {
+	var sources = arguments.slice(1);
+	for (var i = 0; i < sources.length; i++) {
+		var s = sources[i];
+		if (!s || (typeof s !== 'object' && typeof s !== 'function'))
+			continue;
+		for (var key in s) {
+			if (s.hasOwnProperty(key)) {
+				if (s[key] !== target[key]) {
+          // if array, make a copy of it
+					if (s[key] instanceof Array) {
+						target[key] = s[key].slice();
+					}
+          // not a native Object (so, either a primitive or instance of something where the programmer probably wants that instance to stick around)
+          // or not the same type of object as target (maybe target is undefined or null or something)
+					else if (s[key].constructor !== Object || typeof target[key] !== typeof s[key]) {
+						target[key] = s[key];
+					}
+          // if object of same class as target, recursive this with these objects
+					else if (s[key].constructor === Object && target[key].constructor === Object) {
+						target[key] = extendObject({}, target[key], s[key]);
+					}
+				}
+			}
+			else break; // hasOwnProperty === false, meaning we're through the non-prototype stuff
+		}
+	}
+	return target;
 };
-
-function extendObject (target, source, shallow) {
-  for (var key in source) {
-    // iterate through props in source object
-    if (source.hasOwnProperty(key)) {
-      targetMeta = setMeta(target[key]);
-      sourceMeta = setMeta(source[key]);
-      if (source[key] !== target[key]) {
-        // not the same, better update target
-        if (!shallow && sourceMeta && targetMeta && targetMeta === sourceMeta) {
-          // deep extend if of same type
-          target[key] = extendObject(target[key], source[key], true);
-        } else if (sourceMeta !== 0) {
-          // shallow, or just set to source's prop
-          target[key] = source[key];
-        }
-      }
-    }
-    else break; // hasOwnProperty === false, meaning we're through the non-prototype stuff
-  }
-  return target;
-}
 
 module.exports = extendObject;

@@ -1,4 +1,8 @@
-/**
+/********************************
+ *	DEPRECATED
+ *	use offsetFrom instead
+ ********************************
+ *
  *  get DOMElement's offset from page
  *
  *  @param DOMElement
@@ -7,22 +11,24 @@
  *    top: Number
  *  }
  */
-function getPageOffset (element) {
-  if (!element) {
-    throw 'getPageOffset passed an invalid element';
-  }
-  var pageOffsetX = element.offsetLeft,
-      pageOffsetY = element.offsetTop;
+var getPageOffset = function (element) {
+	if (!element) {
+		throw 'getPageOffset passed an invalid element';
+	}
+	var pageOffsetX = element.offsetLeft,
+			pageOffsetY = element.offsetTop;
 
-  while (element = element.offsetParent) {
-    pageOffsetX += element.offsetLeft;
-    pageOffsetY += element.offsetTop;
-  }
+	element = element.offsetParent;
+	while (element) {
+		pageOffsetX += element.offsetLeft;
+		pageOffsetY += element.offsetTop;
+		element = element.offsetParent;
+	}
 
-  return {
-    left : pageOffsetX,
-    top : pageOffsetY
-  }
-}
+	return {
+		left: pageOffsetX,
+		top: pageOffsetY
+	};
+};
 
 module.exports = getPageOffset;

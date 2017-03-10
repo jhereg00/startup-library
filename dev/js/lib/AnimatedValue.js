@@ -1,4 +1,4 @@
-/***
+/** *
  *  AnimatedValue class
  *  sets value based on keyframes and position in animation
  *
@@ -52,56 +52,56 @@
  */
 
 var AnimatedValue = function (keyframes, noStartBound, noEndBound) {
-  if (keyframes.length < 2)
-    throw "AnimatedValue passed insufficient keyframes. Must have at least 2";
+	if (keyframes.length < 2)
+		throw "AnimatedValue passed insufficient keyframes. Must have at least 2";
 
-  this.keyframes = keyframes;
-  this.length = this.keyframes[this.keyframes.length - 1].frame;
-  this.startBound = !noStartBound;
-  this.endBound = !noEndBound;
-}
+	this.keyframes = keyframes;
+	this.length = this.keyframes[this.keyframes.length - 1].frame;
+	this.startBound = !noStartBound;
+	this.endBound = !noEndBound;
+};
 AnimatedValue.prototype = {
-  get: function (frame) {
+	get: function (frame) {
     // before or after
-    if (this.startBound && this.keyframes[0].frame >= frame)
-      return this.keyframes[0].value;
-    else if (this.endBound && this.keyframes[this.keyframes.length - 1].frame <= frame)
-      return this.keyframes[this.keyframes.length - 1].value;
+		if (this.startBound && this.keyframes[0].frame >= frame)
+			return this.keyframes[0].value;
+		else if (this.endBound && this.keyframes[this.keyframes.length - 1].frame <= frame)
+			return this.keyframes[this.keyframes.length - 1].value;
 
     // nope, do the maths
-    var keyframe = 1;
-    for (; keyframe < this.keyframes.length - 1 && frame > this.keyframes[keyframe].frame; keyframe++);
-    if (typeof this.keyframes[keyframe - 1].ease === 'function') {
-      return this.keyframes[keyframe - 1].ease(
+		var keyframe = 1;
+		for (; keyframe < this.keyframes.length - 1 && frame > this.keyframes[keyframe].frame; keyframe++);
+		if (typeof this.keyframes[keyframe - 1].ease === 'function') {
+			return this.keyframes[keyframe - 1].ease(
         this.keyframes[keyframe - 1].value,
         this.keyframes[keyframe].value - this.keyframes[keyframe - 1].value,
         (frame - this.keyframes[keyframe - 1].frame) / (this.keyframes[keyframe].frame - this.keyframes[keyframe - 1].frame)
       );
-    }
-    else {
-      return (this.keyframes[keyframe - 1].value + (this.keyframes[keyframe].value - this.keyframes[keyframe - 1].value) * (frame - this.keyframes[keyframe - 1].frame) / (this.keyframes[keyframe].frame - this.keyframes[keyframe - 1].frame));
-    }
-  },
-  get firstFrame() {
-    return this.keyframes[0].frame;
-  },
-  get lastFrame() {
-    return this.keyframes[this.keyframes.length - 1].frame;
-  }
-}
+		}
+		else {
+			return (this.keyframes[keyframe - 1].value + (this.keyframes[keyframe].value - this.keyframes[keyframe - 1].value) * (frame - this.keyframes[keyframe - 1].frame) / (this.keyframes[keyframe].frame - this.keyframes[keyframe - 1].frame));
+		}
+	},
+	get firstFrame() {
+		return this.keyframes[0].frame;
+	},
+	get lastFrame() {
+		return this.keyframes[this.keyframes.length - 1].frame;
+	}
+};
 // static helper
 AnimatedValue.make = function (startValue, endValue, endFrame, easeFn) {
-  return new AnimatedValue([
-    {
-      frame: 0,
-      value: startValue,
-      ease: easeFn
-    },
-    {
-      frame: endFrame,
-      value: endValue
-    }
-  ]);
-}
+	return new AnimatedValue([
+		{
+			frame: 0,
+			value: startValue,
+			ease: easeFn
+		},
+		{
+			frame: endFrame,
+			value: endValue
+		}
+	]);
+};
 
 module.exports = AnimatedValue;
