@@ -22,7 +22,7 @@ var extendObject = function (target) {
 					}
           // not a native Object (so, either a primitive or instance of something where the programmer probably wants that instance to stick around)
           // or not the same type of object as target (maybe target is undefined or null or something)
-					else if (s[key].constructor !== Object || typeof target[key] !== typeof s[key]) {
+					else if ((s[key] !== null && s[key] !== undefined && s[key].constructor && s[key].constructor !== Object) || typeof target[key] !== typeof s[key]) {
 						target[key] = s[key];
 					}
           // if object of same class as target, recursive this with these objects
