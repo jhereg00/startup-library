@@ -5,7 +5,10 @@
  * @param ...sources (rewritten to be ES5 friendly)
  */
 var extendObject = function (target) {
-	var sources = arguments.slice(1);
+	var sources = [];
+	for (var i = 1; i < arguments.length; i++) {
+		sources.push(arguments[i]);
+	}
 	for (var i = 0; i < sources.length; i++) {
 		var s = sources[i];
 		if (!s || (typeof s !== 'object' && typeof s !== 'function'))
